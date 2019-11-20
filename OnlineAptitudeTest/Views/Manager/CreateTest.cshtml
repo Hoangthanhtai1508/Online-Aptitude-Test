@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "CreateTest";
+    Layout = "~/Views/Shared/_ManagerLayout.cshtml";
+}
+<div class="outer-w3-agile col-xl mt-3 mr-xl-3">
+    <h3 class="main-title-w3layouts mb-2 text-center">Create Test</h3>
+    <div id="content">
+        @if (TempData["check"] != null && (bool)TempData["check"])
+        {
+            <span class="timer success">@TempData["statusCTC"]</span>
+        }
+        else
+        {
+            <span class="timer failed">@TempData["statusCTC"]</span>
+        }
+
+        @using (Html.BeginForm("CreateTest", "Manager", FormMethod.Post))
+        {
+            <table>
+                <tr>
+                    <td width="130px">Date start</td>
+                    <td><input type="date" name="date" class="form-control" required /></td>
+                </tr>
+                <tr>
+                    <td>Time start</td>
+                    <td><input type="time" name="time" class="form-control" required /></td>
+                </tr>
+                <tr>
+                    <td>Note</td>
+                    <td><input type="text" name="note" class="form-control" /></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="Create" class="btn btn-success" /></td>
+                </tr>
+            </table>
+
+            
+        }
+
+
+        <div>
+            @Html.ActionLink("Back to List", "TestView", null, new { @class = "btn btn-warning" })
+        </div>
+    </div>
+</div>

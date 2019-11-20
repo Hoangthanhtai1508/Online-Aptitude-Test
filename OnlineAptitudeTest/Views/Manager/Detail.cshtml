@@ -1,0 +1,28 @@
+﻿@model IEnumerable<OnlineAptitudeTest.Models.Question>
+
+@{
+    ViewBag.Title = "GeneralKnowledge";
+    Layout = "~/Views/Shared/_ManagerLayout.cshtml";
+}
+
+<div class="outer-w3-agile col-xl mt-3 mr-xl-3">
+    <h3 class="main-title-w3layouts mb-2 text-center">Question Details</h3>
+    <div id="content">
+        <hr />
+        <div class="container-fluid">
+            @foreach (var item in Model)
+            {
+                <p>Question: @Html.DisplayFor(modelItem => item.QuestionDetails) <br /><span style="color:green">@Html.ActionLink("Edit", "Edit", new { id = item.QuestionID }) | @Html.ActionLink("Delete", "DeleteComputerTechnology", new { id = item.QuestionID })</span></p>
+                <br />
+                <p>A. <span> @Html.DisplayFor(modelItem => item.Answer_a)<br /></span></p>
+                <p>B. <span> @Html.DisplayFor(modelItem => item.Answer_b)<br /></span></p>
+                <p>C. <span> @Html.DisplayFor(modelItem => item.Answer_c)<br /></span></p>
+                <p>D. <span> @Html.DisplayFor(modelItem => item.Answer_d)<br /></span></p>
+                <p style="color:red">Correct answer: <span>@Html.DisplayFor(modelItem => item.CorrectAnswer)</span></p>
+                <hr />
+            }
+            <a class="btn btn-warning" onclick="window.history.back()">Back To List</a>
+        </div>
+
+    </div>
+</div>

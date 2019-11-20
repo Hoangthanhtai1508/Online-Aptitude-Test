@@ -1,0 +1,780 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="OnlineAptitudeTestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AdminManager">
+          <Key>
+            <PropertyRef Name="AdminManagerID" />
+          </Key>
+          <Property Name="AdminManagerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Gender" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Birthday" Type="date" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="20" />
+          <Property Name="LastLogin" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Candidate">
+          <Key>
+            <PropertyRef Name="CandidateID" />
+          </Key>
+          <Property Name="CandidateID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Gender" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Birthday" Type="date" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="20" />
+          <Property Name="Education_Details" Type="ntext" />
+          <Property Name="Work_Experience" Type="ntext" />
+          <Property Name="TestCode" Type="int" />
+          <Property Name="TestStatus" Type="int" />
+          <Property Name="Pass" Type="int" />
+          <Property Name="FinalScore" Type="float" />
+          <Property Name="LastLogin" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Candidate_Test_Detail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CandidateID" Type="int" Nullable="false" />
+          <Property Name="QuestionID" Type="int" Nullable="false" />
+          <Property Name="CandidateAnswer" Type="ntext" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="QuestionID" />
+          </Key>
+          <Property Name="QuestionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeID" Type="int" Nullable="false" />
+          <Property Name="QuestionDetails" Type="ntext" Nullable="false" />
+          <Property Name="Answer_a" Type="ntext" Nullable="false" />
+          <Property Name="Answer_b" Type="ntext" Nullable="false" />
+          <Property Name="Answer_c" Type="ntext" Nullable="false" />
+          <Property Name="Answer_d" Type="ntext" Nullable="false" />
+          <Property Name="CorrectAnswer" Type="ntext" />
+          <Property Name="TimeStamp" Type="datetime" />
+        </EntityType>
+        <EntityType Name="QuestionType">
+          <Key>
+            <PropertyRef Name="TypeID" />
+          </Key>
+          <Property Name="TypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Score">
+          <Key>
+            <PropertyRef Name="ScoreID" />
+          </Key>
+          <Property Name="ScoreID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CandidateID" Type="int" Nullable="false" />
+          <Property Name="Part1Score" Type="float" />
+          <Property Name="Part2Score" Type="float" />
+          <Property Name="Part3Score" Type="float" />
+        </EntityType>
+        <EntityType Name="Test">
+          <Key>
+            <PropertyRef Name="TestCode" />
+          </Key>
+          <Property Name="TestCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TimeStart" Type="datetime" Nullable="false" />
+          <Property Name="TimeCreate" Type="datetime" />
+          <Property Name="CreateBy" Type="int" Nullable="false" />
+          <Property Name="Note" Type="ntext" />
+        </EntityType>
+        <EntityType Name="TestCandidateList">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TestCode" Type="int" Nullable="false" />
+          <Property Name="CandidateID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TestQuestion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TestCode" Type="int" Nullable="false" />
+          <Property Name="QuestionID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__AdminMana__RoleI__398D8EEE">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="AdminManager" Type="Self.AdminManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="AdminManager">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Candidate__Candi__52593CB8">
+          <End Role="Candidate" Type="Self.Candidate" Multiplicity="1" />
+          <End Role="Candidate_Test_Detail" Type="Self.Candidate_Test_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidate">
+              <PropertyRef Name="CandidateID" />
+            </Principal>
+            <Dependent Role="Candidate_Test_Detail">
+              <PropertyRef Name="CandidateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Candidate__Quest__534D60F1">
+          <End Role="Question" Type="Self.Question" Multiplicity="1" />
+          <End Role="Candidate_Test_Detail" Type="Self.Candidate_Test_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="QuestionID" />
+            </Principal>
+            <Dependent Role="Candidate_Test_Detail">
+              <PropertyRef Name="QuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Candidate__RoleI__403A8C7D">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Candidate" Type="Self.Candidate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Candidate">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Question__TypeID__47DBAE45">
+          <End Role="QuestionType" Type="Self.QuestionType" Multiplicity="1" />
+          <End Role="Question" Type="Self.Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuestionType">
+              <PropertyRef Name="TypeID" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Score__Candidate__4316F928">
+          <End Role="Candidate" Type="Self.Candidate" Multiplicity="1" />
+          <End Role="Score" Type="Self.Score" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidate">
+              <PropertyRef Name="CandidateID" />
+            </Principal>
+            <Dependent Role="Score">
+              <PropertyRef Name="CandidateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Test__CreateBy__3D5E1FD2">
+          <End Role="AdminManager" Type="Self.AdminManager" Multiplicity="1" />
+          <End Role="Test" Type="Self.Test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdminManager">
+              <PropertyRef Name="AdminManagerID" />
+            </Principal>
+            <Dependent Role="Test">
+              <PropertyRef Name="CreateBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TestCandi__Candi__4F7CD00D">
+          <End Role="Candidate" Type="Self.Candidate" Multiplicity="1" />
+          <End Role="TestCandidateList" Type="Self.TestCandidateList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidate">
+              <PropertyRef Name="CandidateID" />
+            </Principal>
+            <Dependent Role="TestCandidateList">
+              <PropertyRef Name="CandidateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TestCandi__TestC__4E88ABD4">
+          <End Role="Test" Type="Self.Test" Multiplicity="1" />
+          <End Role="TestCandidateList" Type="Self.TestCandidateList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Test">
+              <PropertyRef Name="TestCode" />
+            </Principal>
+            <Dependent Role="TestCandidateList">
+              <PropertyRef Name="TestCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TestQuest__Quest__4BAC3F29">
+          <End Role="Question" Type="Self.Question" Multiplicity="1" />
+          <End Role="TestQuestion" Type="Self.TestQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="QuestionID" />
+            </Principal>
+            <Dependent Role="TestQuestion">
+              <PropertyRef Name="QuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TestQuest__TestC__4AB81AF0">
+          <End Role="Test" Type="Self.Test" Multiplicity="1" />
+          <End Role="TestQuestion" Type="Self.TestQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Test">
+              <PropertyRef Name="TestCode" />
+            </Principal>
+            <Dependent Role="TestQuestion">
+              <PropertyRef Name="TestCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OnlineAptitudeTestModelStoreContainer">
+          <EntitySet Name="AdminManager" EntityType="Self.AdminManager" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Candidate" EntityType="Self.Candidate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Candidate_Test_Detail" EntityType="Self.Candidate_Test_Detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Question" EntityType="Self.Question" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuestionType" EntityType="Self.QuestionType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Score" EntityType="Self.Score" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Test" EntityType="Self.Test" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TestCandidateList" EntityType="Self.TestCandidateList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TestQuestion" EntityType="Self.TestQuestion" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__AdminMana__RoleI__398D8EEE" Association="Self.FK__AdminMana__RoleI__398D8EEE">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="AdminManager" EntitySet="AdminManager" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Candidate__Candi__52593CB8" Association="Self.FK__Candidate__Candi__52593CB8">
+            <End Role="Candidate" EntitySet="Candidate" />
+            <End Role="Candidate_Test_Detail" EntitySet="Candidate_Test_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Candidate__Quest__534D60F1" Association="Self.FK__Candidate__Quest__534D60F1">
+            <End Role="Question" EntitySet="Question" />
+            <End Role="Candidate_Test_Detail" EntitySet="Candidate_Test_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Candidate__RoleI__403A8C7D" Association="Self.FK__Candidate__RoleI__403A8C7D">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Candidate" EntitySet="Candidate" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Question__TypeID__47DBAE45" Association="Self.FK__Question__TypeID__47DBAE45">
+            <End Role="QuestionType" EntitySet="QuestionType" />
+            <End Role="Question" EntitySet="Question" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Score__Candidate__4316F928" Association="Self.FK__Score__Candidate__4316F928">
+            <End Role="Candidate" EntitySet="Candidate" />
+            <End Role="Score" EntitySet="Score" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Test__CreateBy__3D5E1FD2" Association="Self.FK__Test__CreateBy__3D5E1FD2">
+            <End Role="AdminManager" EntitySet="AdminManager" />
+            <End Role="Test" EntitySet="Test" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TestCandi__Candi__4F7CD00D" Association="Self.FK__TestCandi__Candi__4F7CD00D">
+            <End Role="Candidate" EntitySet="Candidate" />
+            <End Role="TestCandidateList" EntitySet="TestCandidateList" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TestCandi__TestC__4E88ABD4" Association="Self.FK__TestCandi__TestC__4E88ABD4">
+            <End Role="Test" EntitySet="Test" />
+            <End Role="TestCandidateList" EntitySet="TestCandidateList" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TestQuest__Quest__4BAC3F29" Association="Self.FK__TestQuest__Quest__4BAC3F29">
+            <End Role="Question" EntitySet="Question" />
+            <End Role="TestQuestion" EntitySet="TestQuestion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TestQuest__TestC__4AB81AF0" Association="Self.FK__TestQuest__TestC__4AB81AF0">
+            <End Role="Test" EntitySet="Test" />
+            <End Role="TestQuestion" EntitySet="TestQuestion" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OnlineAptitudeTestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AdminManager">
+          <Key>
+            <PropertyRef Name="AdminManagerID" />
+          </Key>
+          <Property Name="AdminManagerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Birthday" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LastLogin" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Role" Relationship="Self.FK__AdminMana__RoleI__398D8EEE" FromRole="AdminManager" ToRole="Role" />
+          <NavigationProperty Name="Tests" Relationship="Self.FK__Test__CreateBy__3D5E1FD2" FromRole="AdminManager" ToRole="Test" />
+        </EntityType>
+        <EntityType Name="Candidate">
+          <Key>
+            <PropertyRef Name="CandidateID" />
+          </Key>
+          <Property Name="CandidateID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Birthday" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Education_Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Work_Experience" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TestCode" Type="Int32" />
+          <Property Name="TestStatus" Type="Int32" />
+          <Property Name="Pass" Type="Int32" />
+          <Property Name="FinalScore" Type="Double" />
+          <Property Name="LastLogin" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Candidate_Test_Detail" Relationship="Self.FK__Candidate__Candi__52593CB8" FromRole="Candidate" ToRole="Candidate_Test_Detail" />
+          <NavigationProperty Name="Role" Relationship="Self.FK__Candidate__RoleI__403A8C7D" FromRole="Candidate" ToRole="Role" />
+          <NavigationProperty Name="Scores" Relationship="Self.FK__Score__Candidate__4316F928" FromRole="Candidate" ToRole="Score" />
+          <NavigationProperty Name="TestCandidateLists" Relationship="Self.FK__TestCandi__Candi__4F7CD00D" FromRole="Candidate" ToRole="TestCandidateList" />
+        </EntityType>
+        <EntityType Name="Candidate_Test_Detail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CandidateID" Type="Int32" Nullable="false" />
+          <Property Name="QuestionID" Type="Int32" Nullable="false" />
+          <Property Name="CandidateAnswer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Candidate" Relationship="Self.FK__Candidate__Candi__52593CB8" FromRole="Candidate_Test_Detail" ToRole="Candidate" />
+          <NavigationProperty Name="Question" Relationship="Self.FK__Candidate__Quest__534D60F1" FromRole="Candidate_Test_Detail" ToRole="Question" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="QuestionID" />
+          </Key>
+          <Property Name="QuestionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeID" Type="Int32" Nullable="false" />
+          <Property Name="QuestionDetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Answer_a" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Answer_b" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Answer_c" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Answer_d" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CorrectAnswer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TimeStamp" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Candidate_Test_Detail" Relationship="Self.FK__Candidate__Quest__534D60F1" FromRole="Question" ToRole="Candidate_Test_Detail" />
+          <NavigationProperty Name="QuestionType" Relationship="Self.FK__Question__TypeID__47DBAE45" FromRole="Question" ToRole="QuestionType" />
+          <NavigationProperty Name="TestQuestions" Relationship="Self.FK__TestQuest__Quest__4BAC3F29" FromRole="Question" ToRole="TestQuestion" />
+        </EntityType>
+        <EntityType Name="QuestionType">
+          <Key>
+            <PropertyRef Name="TypeID" />
+          </Key>
+          <Property Name="TypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Questions" Relationship="Self.FK__Question__TypeID__47DBAE45" FromRole="QuestionType" ToRole="Question" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="AdminManagers" Relationship="Self.FK__AdminMana__RoleI__398D8EEE" FromRole="Role" ToRole="AdminManager" />
+          <NavigationProperty Name="Candidates" Relationship="Self.FK__Candidate__RoleI__403A8C7D" FromRole="Role" ToRole="Candidate" />
+        </EntityType>
+        <EntityType Name="Score">
+          <Key>
+            <PropertyRef Name="ScoreID" />
+          </Key>
+          <Property Name="ScoreID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CandidateID" Type="Int32" Nullable="false" />
+          <Property Name="Part1Score" Type="Double" />
+          <Property Name="Part2Score" Type="Double" />
+          <Property Name="Part3Score" Type="Double" />
+          <NavigationProperty Name="Candidate" Relationship="Self.FK__Score__Candidate__4316F928" FromRole="Score" ToRole="Candidate" />
+        </EntityType>
+        <EntityType Name="Test">
+          <Key>
+            <PropertyRef Name="TestCode" />
+          </Key>
+          <Property Name="TestCode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TimeStart" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TimeCreate" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="Int32" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AdminManager" Relationship="Self.FK__Test__CreateBy__3D5E1FD2" FromRole="Test" ToRole="AdminManager" />
+          <NavigationProperty Name="TestCandidateLists" Relationship="Self.FK__TestCandi__TestC__4E88ABD4" FromRole="Test" ToRole="TestCandidateList" />
+          <NavigationProperty Name="TestQuestions" Relationship="Self.FK__TestQuest__TestC__4AB81AF0" FromRole="Test" ToRole="TestQuestion" />
+        </EntityType>
+        <EntityType Name="TestCandidateList">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TestCode" Type="Int32" Nullable="false" />
+          <Property Name="CandidateID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Candidate" Relationship="Self.FK__TestCandi__Candi__4F7CD00D" FromRole="TestCandidateList" ToRole="Candidate" />
+          <NavigationProperty Name="Test" Relationship="Self.FK__TestCandi__TestC__4E88ABD4" FromRole="TestCandidateList" ToRole="Test" />
+        </EntityType>
+        <EntityType Name="TestQuestion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TestCode" Type="Int32" Nullable="false" />
+          <Property Name="QuestionID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Question" Relationship="Self.FK__TestQuest__Quest__4BAC3F29" FromRole="TestQuestion" ToRole="Question" />
+          <NavigationProperty Name="Test" Relationship="Self.FK__TestQuest__TestC__4AB81AF0" FromRole="TestQuestion" ToRole="Test" />
+        </EntityType>
+        <Association Name="FK__AdminMana__RoleI__398D8EEE">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="AdminManager" Type="Self.AdminManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="AdminManager">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Test__CreateBy__3D5E1FD2">
+          <End Role="AdminManager" Type="Self.AdminManager" Multiplicity="1" />
+          <End Role="Test" Type="Self.Test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdminManager">
+              <PropertyRef Name="AdminManagerID" />
+            </Principal>
+            <Dependent Role="Test">
+              <PropertyRef Name="CreateBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Candidate__Candi__52593CB8">
+          <End Role="Candidate" Type="Self.Candidate" Multiplicity="1" />
+          <End Role="Candidate_Test_Detail" Type="Self.Candidate_Test_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidate">
+              <PropertyRef Name="CandidateID" />
+            </Principal>
+            <Dependent Role="Candidate_Test_Detail">
+              <PropertyRef Name="CandidateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Candidate__RoleI__403A8C7D">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Candidate" Type="Self.Candidate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Candidate">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Score__Candidate__4316F928">
+          <End Role="Candidate" Type="Self.Candidate" Multiplicity="1" />
+          <End Role="Score" Type="Self.Score" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidate">
+              <PropertyRef Name="CandidateID" />
+            </Principal>
+            <Dependent Role="Score">
+              <PropertyRef Name="CandidateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TestCandi__Candi__4F7CD00D">
+          <End Role="Candidate" Type="Self.Candidate" Multiplicity="1" />
+          <End Role="TestCandidateList" Type="Self.TestCandidateList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidate">
+              <PropertyRef Name="CandidateID" />
+            </Principal>
+            <Dependent Role="TestCandidateList">
+              <PropertyRef Name="CandidateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Candidate__Quest__534D60F1">
+          <End Role="Question" Type="Self.Question" Multiplicity="1" />
+          <End Role="Candidate_Test_Detail" Type="Self.Candidate_Test_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="QuestionID" />
+            </Principal>
+            <Dependent Role="Candidate_Test_Detail">
+              <PropertyRef Name="QuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Question__TypeID__47DBAE45">
+          <End Role="QuestionType" Type="Self.QuestionType" Multiplicity="1" />
+          <End Role="Question" Type="Self.Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuestionType">
+              <PropertyRef Name="TypeID" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TestQuest__Quest__4BAC3F29">
+          <End Role="Question" Type="Self.Question" Multiplicity="1" />
+          <End Role="TestQuestion" Type="Self.TestQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="QuestionID" />
+            </Principal>
+            <Dependent Role="TestQuestion">
+              <PropertyRef Name="QuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TestCandi__TestC__4E88ABD4">
+          <End Role="Test" Type="Self.Test" Multiplicity="1" />
+          <End Role="TestCandidateList" Type="Self.TestCandidateList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Test">
+              <PropertyRef Name="TestCode" />
+            </Principal>
+            <Dependent Role="TestCandidateList">
+              <PropertyRef Name="TestCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TestQuest__TestC__4AB81AF0">
+          <End Role="Test" Type="Self.Test" Multiplicity="1" />
+          <End Role="TestQuestion" Type="Self.TestQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Test">
+              <PropertyRef Name="TestCode" />
+            </Principal>
+            <Dependent Role="TestQuestion">
+              <PropertyRef Name="TestCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OnlineAptitudeTestEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AdminManagers" EntityType="Self.AdminManager" />
+          <EntitySet Name="Candidates" EntityType="Self.Candidate" />
+          <EntitySet Name="Candidate_Test_Detail" EntityType="Self.Candidate_Test_Detail" />
+          <EntitySet Name="Questions" EntityType="Self.Question" />
+          <EntitySet Name="QuestionTypes" EntityType="Self.QuestionType" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="Scores" EntityType="Self.Score" />
+          <EntitySet Name="Tests" EntityType="Self.Test" />
+          <EntitySet Name="TestCandidateLists" EntityType="Self.TestCandidateList" />
+          <EntitySet Name="TestQuestions" EntityType="Self.TestQuestion" />
+          <AssociationSet Name="FK__AdminMana__RoleI__398D8EEE" Association="Self.FK__AdminMana__RoleI__398D8EEE">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="AdminManager" EntitySet="AdminManagers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Test__CreateBy__3D5E1FD2" Association="Self.FK__Test__CreateBy__3D5E1FD2">
+            <End Role="AdminManager" EntitySet="AdminManagers" />
+            <End Role="Test" EntitySet="Tests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Candidate__Candi__52593CB8" Association="Self.FK__Candidate__Candi__52593CB8">
+            <End Role="Candidate" EntitySet="Candidates" />
+            <End Role="Candidate_Test_Detail" EntitySet="Candidate_Test_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Candidate__RoleI__403A8C7D" Association="Self.FK__Candidate__RoleI__403A8C7D">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="Candidate" EntitySet="Candidates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Score__Candidate__4316F928" Association="Self.FK__Score__Candidate__4316F928">
+            <End Role="Candidate" EntitySet="Candidates" />
+            <End Role="Score" EntitySet="Scores" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TestCandi__Candi__4F7CD00D" Association="Self.FK__TestCandi__Candi__4F7CD00D">
+            <End Role="Candidate" EntitySet="Candidates" />
+            <End Role="TestCandidateList" EntitySet="TestCandidateLists" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Candidate__Quest__534D60F1" Association="Self.FK__Candidate__Quest__534D60F1">
+            <End Role="Question" EntitySet="Questions" />
+            <End Role="Candidate_Test_Detail" EntitySet="Candidate_Test_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Question__TypeID__47DBAE45" Association="Self.FK__Question__TypeID__47DBAE45">
+            <End Role="QuestionType" EntitySet="QuestionTypes" />
+            <End Role="Question" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TestQuest__Quest__4BAC3F29" Association="Self.FK__TestQuest__Quest__4BAC3F29">
+            <End Role="Question" EntitySet="Questions" />
+            <End Role="TestQuestion" EntitySet="TestQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TestCandi__TestC__4E88ABD4" Association="Self.FK__TestCandi__TestC__4E88ABD4">
+            <End Role="Test" EntitySet="Tests" />
+            <End Role="TestCandidateList" EntitySet="TestCandidateLists" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TestQuest__TestC__4AB81AF0" Association="Self.FK__TestQuest__TestC__4AB81AF0">
+            <End Role="Test" EntitySet="Tests" />
+            <End Role="TestQuestion" EntitySet="TestQuestions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OnlineAptitudeTestModelStoreContainer" CdmEntityContainer="OnlineAptitudeTestEntities">
+          <EntitySetMapping Name="AdminManagers">
+            <EntityTypeMapping TypeName="OnlineAptitudeTestModel.AdminManager">
+              <MappingFragment StoreEntitySet="AdminManager">
+                <ScalarProperty Name="AdminManagerID" ColumnName="AdminManagerID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Candidates">
+            <EntityTypeMapping TypeName="OnlineAptitudeTestModel.Candidate">
+              <MappingFragment StoreEntitySet="Candidate">
+                <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Education_Details" ColumnName="Education_Details" />
+                <ScalarProperty Name="Work_Experience" ColumnName="Work_Experience" />
+                <ScalarProperty Name="TestCode" ColumnName="TestCode" />
+                <ScalarProperty Name="TestStatus" ColumnName="TestStatus" />
+                <ScalarProperty Name="Pass" ColumnName="Pass" />
+                <ScalarProperty Name="FinalScore" ColumnName="FinalScore" />
+                <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Candidate_Test_Detail">
+            <EntityTypeMapping TypeName="OnlineAptitudeTestModel.Candidate_Test_Detail">
+              <MappingFragment StoreEntitySet="Candidate_Test_Detail">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
+                <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
+                <ScalarProperty Name="CandidateAnswer" ColumnName="CandidateAnswer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Questions">
+            <EntityTypeMapping TypeName="OnlineAptitudeTestModel.Question">
+              <MappingFragment StoreEntitySet="Question">
+                <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="QuestionDetails" ColumnName="QuestionDetails" />
+                <ScalarProperty Name="Answer_a" ColumnName="Answer_a" />
+                <ScalarProperty Name="Answer_b" ColumnName="Answer_b" />
+                <ScalarProperty Name="Answer_c" ColumnName="Answer_c" />
+                <ScalarProperty Name="Answer_d" ColumnName="Answer_d" />
+                <ScalarProperty Name="CorrectAnswer" ColumnName="CorrectAnswer" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuestionTypes">
+            <EntityTypeMapping TypeName="OnlineAptitudeTestModel.QuestionType">
+              <MappingFragment StoreEntitySet="QuestionType">
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="OnlineAptitudeTestModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Scores">
+            <EntityTypeMapping TypeName="OnlineAptitudeTestModel.Score">
+              <MappingFragment StoreEntitySet="Score">
+                <ScalarProperty Name="ScoreID" ColumnName="ScoreID" />
+                <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
+                <ScalarProperty Name="Part1Score" ColumnName="Part1Score" />
+                <ScalarProperty Name="Part2Score" ColumnName="Part2Score" />
+                <ScalarProperty Name="Part3Score" ColumnName="Part3Score" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tests">
+            <EntityTypeMapping TypeName="OnlineAptitudeTestModel.Test">
+              <MappingFragment StoreEntitySet="Test">
+                <ScalarProperty Name="TestCode" ColumnName="TestCode" />
+                <ScalarProperty Name="TimeStart" ColumnName="TimeStart" />
+                <ScalarProperty Name="TimeCreate" ColumnName="TimeCreate" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestCandidateLists">
+            <EntityTypeMapping TypeName="OnlineAptitudeTestModel.TestCandidateList">
+              <MappingFragment StoreEntitySet="TestCandidateList">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TestCode" ColumnName="TestCode" />
+                <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestQuestions">
+            <EntityTypeMapping TypeName="OnlineAptitudeTestModel.TestQuestion">
+              <MappingFragment StoreEntitySet="TestQuestion">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TestCode" ColumnName="TestCode" />
+                <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

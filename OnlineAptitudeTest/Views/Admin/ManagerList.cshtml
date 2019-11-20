@@ -1,0 +1,114 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<OnlineAptitudeTest.Models.AdminManager>
+@{
+    ViewBag.Title = "ManagerList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="outer-w3-agile col-xl mt-3 mr-xl-3">
+    <h3 class="main-title-w3layouts mb-2 text-center">Manager List</h3>
+    <div>
+        <div id="content">
+            <div class="title-content">
+                @if (TempData["AdminManagerID"] == null)
+                {
+                    <p style="color:brown"><span class="font-weight-bold">@TempData["stt"]</span></p>
+                }
+                else
+                {
+                    <p> <span class="font-weight-bold" style="color:red">@TempData["stt"]</span></p>
+                }
+            </div>
+            <hr />
+            <span style="color:green" class="font-weight-bold">
+                @Html.ActionLink("Create New", "CreateManager")
+            </span>
+            <hr />
+            @using (Html.BeginForm("ManagerList", "Admin"))
+            {
+                <div>
+                    <span>Search by name: </span>
+                    <input type="text" name="txtSearch" />
+                    <input type="submit" value="Search" class="btn btn-success" />
+                </div>
+            }
+            <hr />
+
+
+            <div>
+                <h4 class="tittle-w3-agileits mb-4"></h4>
+                <table class="table table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>
+                                ID
+                            </th>
+                            <th>
+                                Username
+                            </th>
+                            <th>
+                                EmailAddress
+                            </th>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                Gender
+                            </th>
+                            <th>
+                                Phone
+                            </th>
+                            <th>
+                                LastLogin
+                            </th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    @foreach (var item in Model)
+                    {
+                        <tbody>
+                            <tr>
+                                <td >
+                                    @Html.DisplayFor(modelItem => item.AdminManagerID)
+                                </td>
+                                <td >
+                                    @Html.DisplayFor(modelItem => item.Username)
+                                </td>
+                                <td >
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>
+                                <td >
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td >
+                                    @Html.DisplayFor(modelItem => item.Gender)
+                                </td>
+                                <td >
+                                    @Html.DisplayFor(modelItem => item.Phone)
+                                </td>
+                                <td >
+                                    @Html.DisplayFor(modelItem => item.LastLogin)
+                                </td>
+                                <td style="width:22%">
+                                    <span>
+                                        @Html.ActionLink("Details", "Details", new { id = item.AdminManagerID }, new { @class = "btn btn-info" })
+                                        @Html.ActionLink("Edit", "EditManager", new { id = item.AdminManagerID }, new { @class = "btn btn-success" })
+                                        @Html.ActionLink("Delete", "DeleteManager", new { id = item.AdminManagerID }, new { @class = "btn btn-danger" })
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    }
+                </table>
+            </div>
+            <!-- Thêm mã phân trang -->
+            <br />
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+
+            @Html.PagedListPager(Model, page => Url.Action("ManagerList",
+                new { page }))
+            <!-- Kết thúc -->
+        </div>
+    </div>
+</div>
+

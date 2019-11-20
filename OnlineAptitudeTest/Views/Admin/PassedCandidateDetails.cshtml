@@ -1,0 +1,87 @@
+﻿@using OnlineAptitudeTest.Models
+@model CandidateScoreViewModel
+@{
+    ViewBag.Title = "PassedCandidateDetails";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="outer-w3-agile col-xl mt-3 mr-xl-3">
+    <h3 class="main-title-w3layouts mb-2 text-center">Passed Candidate Details</h3>
+    <div id="content">
+
+
+        <table class="table table-bordered" style="width:60%; margin:auto">
+            <tbody>
+                <tr>
+                    <td style="font-weight:bold">Candidate ID</td>
+                    <td>@Model.candidate.CandidateID</td>
+                </tr>
+                <tr>
+                    <td style="width:325px; font-weight:bold">Name</td>
+                    <td>@Model.candidate.Name</td>
+                </tr>
+                <tr>
+                    <td style="font-weight:bold">Email</td>
+                    <td>@Model.candidate.Email</td>
+                </tr>
+                <tr>
+                    <td style="font-weight:bold">Phone</td>
+                    <td>@Model.candidate.Phone</td>
+                </tr>
+                <tr>
+                    <td style="font-weight:bold">Gender</td>
+                    <td>@Model.candidate.Gender</td>
+                </tr>
+                <tr>
+                    <td style="font-weight:bold">Birthday</td>
+                    <td>@Model.candidate.Birthday</td>
+                </tr>
+                <tr>
+                    <td style="font-weight:bold">Address</td>
+                    <td>@Model.candidate.Address</td>
+                </tr>
+                <tr>
+                    <td style="font-weight:bold">Education Details</td>
+                    <td>@Model.candidate.Education_Details</td>
+                </tr>
+                <tr>
+                    <td style="font-weight:bold">Work Experiences</td>
+                    <td>@Model.candidate.Work_Experience</td>
+                </tr>
+                <tr>
+                    <td style="font-weight:bold">General Knowledge score</td>
+                    <td>@Model.score.Part1Score</td>
+                </tr>
+                <tr>
+                    <td style="font-weight:bold">Mathematics score</td>
+                    <td>@Model.score.Part2Score</td>
+                </tr>
+                <tr>
+                    <td style="font-weight:bold">Computer Technology score</td>
+                    <td>@Model.score.Part3Score</td>
+                </tr>
+                <tr>
+                    <td style="font-weight:bold">Final score</td>
+                    <td>@String.Format("{0:0.00}", Model.candidate.FinalScore)</td>
+                </tr>
+                <tr>
+                    <td style="font-weight:bold">Final result</td>
+                    @if (Model.candidate.Pass == 1)
+                    {
+                        <td>Passed</td>
+                    }
+                    else
+                    {
+                        <td>Failed</td>
+                    }
+                </tr>
+            </tbody>
+        </table>
+        <br />
+        <div class="text-center">
+            @Html.ActionLink("Back to list", "PassedCandidateList", null, new { @class = "btn btn-warning" })
+        </div>
+
+    </div>
+</div>

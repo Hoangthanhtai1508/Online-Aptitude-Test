@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewBag.Title = "Report";
+    Layout = "~/Views/Shared/_ManagerLayout.cshtml";
+}
+
+<div class="outer-w3-agile col-xl mt-3 mr-xl-3">
+    <h3 class="main-title-w3layouts mb-2 text-center">Report</h3>
+    <div id="content">
+        <div class="title-content">
+            @if (TempData["sttinfo"] == null)
+            {
+
+            }
+            else
+            {
+                <p> <span class="font-weight-bold" style="color:red">@TempData["info"]</span></p>
+            }
+        </div>
+        <div class="blank-page-content">
+            <br />
+            <table>
+                <tr>
+                    <td colspan="2"><hr /></td>
+                </tr>
+                <tr>
+                    <td style="font-size:18px" class="font-weight-bold"> View report by day:</td>
+
+                    <td>
+                        @using (Html.BeginForm("ShowReport2", "Manager"))
+                        {
+                            <input type="date" name="NgayChon" required />
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><hr /></td>
+                </tr>
+                <tr>
+                    <td style="font-size:18px;width:30%" class="font-weight-bold"> View report by period: </td>
+                    <td>
+                        @using (Html.BeginForm("ShowReport", "Manager"))
+                        {
+                            <label>from</label>
+                            <input type="date" name="TuNgay" required />
+                            <label>to</label>
+                            <input type="date" name="DenNgay" required />
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><hr /></td>
+                </tr>
+                <tr>
+                    <td style="font-size:18px" class="font-weight-bold"> View report by month:</td>
+
+                    <td>
+                        @using (Html.BeginForm("ShowReport3", "Manager"))
+                        {
+                            <input type="month" name="ThangChon" required />
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><hr /></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+

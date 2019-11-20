@@ -1,0 +1,168 @@
+﻿@using OnlineAptitudeTest.Models
+@{
+    var question = Model as Question;
+    ViewBag.Title = "Edit question ID: " + question.QuestionID;
+    Layout = "~/Views/Shared/_ManagerLayout.cshtml";
+}
+
+<div class="outer-w3-agile col-xl mt-3 mr-xl-3">
+    <h3 class="main-title-w3layouts mb-2 text-center">Edit Question</h3>
+    <div id="content">
+        <div class="title-content">
+            <span class="title">@ViewBag.Title</span>
+            @if (TempData["QuestionID"] != null && (bool)TempData["QuestionID"])
+            {
+                <p style="color:lawngreen"><span class="timer success">@TempData["status"]</span></p>
+            }
+            else
+            {
+                <p style="color:lawngreen"><span class="timer failed">@TempData["status"]</span></p>
+            }
+        </div>
+        <div class="row">
+            <div id="add_normal" class="col s12">
+                @using (Html.BeginForm("Edit", "Manager", FormMethod.Post))
+                {
+                    <div>
+                        <input type="hidden" id="QuestionID" name="QuestionID" required value="@question.QuestionID" class="hidden">
+                    </div>
+
+                    <table style="width:100%">
+                        <tr>
+                            <td style="width:12%">Question type:</td>
+                            <td>
+                                <select name="unit" class="form-control">
+                                    @if (@question.TypeID == 1)
+                                    {
+                                        <option value="1" selected>General Knowledge</option>
+                                        <option value="2">Mathematics</option>
+                                        <option value="3">Computer Technology</option>
+                                    }
+                                    else if (@question.TypeID == 2)
+                                    {
+                                        <option value="1">General Knowledge</option>
+                                        <option value="2" selected>Mathematics</option>
+                                        <option value="3">Computer Technology</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="1">General Knowledge</option>
+                                        <option value="2">Mathematics</option>
+                                        <option value="3" selected>Computer Technology</option>
+                                    }
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Question:</td>
+                            <td>
+                                <div class="input-field">
+                                    <input type="text" class="form-control" id="Question1" name="Question1" required value="@question.QuestionDetails">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Answer A:</td>
+                            <td>
+                                <div class="input-field">
+                                    <input type="text" class="form-control" name="answer_a" id="answer_a" onchange="get_val(this.id)" required value="@question.Answer_a">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Answer B:</td>
+                            <td>
+                                <div class="input-field">
+                                    <input type="text" class="form-control" id="answer_b" name="answer_b" onchange="get_val(this.id)" required value="@question.Answer_b">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Answer C:</td>
+                            <td>
+                                <div class="input-field">
+                                    <input type="text" class="form-control" name="answer_c" id="answer_c" onchange="get_val(this.id)" required value="@question.Answer_c">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Answer D:</td>
+                            <td>
+                                <div class="input-field">
+                                    <input type="text" class="form-control" name="answer_d" id="answer_d" onchange="get_val(this.id)" required value="@question.Answer_d">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Correct Answer:</td>
+                            <td>
+                                @if (@question.CorrectAnswer.Contains(@question.Answer_a))
+                                {
+                                    <select name="correct_answer" class="form-control">
+                                        <option value="@question.Answer_a" id="val_answer_a" selected>A</option>
+                                        <option value="@question.Answer_b" id="val_answer_b">B</option>
+                                        <option value="@question.Answer_c" id="val_answer_c">C</option>
+                                        <option value="@question.Answer_d" id="val_answer_d">D</option>
+                                    </select>
+                                }
+                                else if (@question.CorrectAnswer.Contains(@question.Answer_b))
+                                {
+                                    <select name="correct_answer" class="form-control">
+                                        <option value="@question.Answer_a" id="val_answer_a">A</option>
+                                        <option value="@question.Answer_b" id="val_answer_b" selected>B</option>
+                                        <option value="@question.Answer_c" id="val_answer_c">C</option>
+                                        <option value="@question.Answer_d" id="val_answer_d">D</option>
+                                    </select>
+                                }
+                                else if (@question.CorrectAnswer.Contains(@question.Answer_c))
+                                {
+                                    <select name="correct_answer" class="form-control">
+                                        <option value="@question.Answer_a" id="val_answer_a">A</option>
+                                        <option value="@question.Answer_b" id="val_answer_b">B</option>
+                                        <option value="@question.Answer_c" id="val_answer_c" selected>C</option>
+                                        <option value="@question.Answer_d" id="val_answer_d">D</option>
+                                    </select>
+                                }
+                                else
+                                {
+                                    <select name="correct_answer" class="form-control">
+                                        <option value="@question.Answer_a" id="val_answer_a">A</option>
+                                        <option value="@question.Answer_b" id="val_answer_b">B</option>
+                                        <option value="@question.Answer_c" id="val_answer_c">C</option>
+                                        <option value="@question.Answer_d" id="val_answer_d" selected>D</option>
+                                    </select>
+                                }
+                            </td>
+                        </tr>
+                    </table>
+                    <br />
+                    <button type="submit" class="btn btn-info" id="edit-student" name="edit-student">Edit</button>
+                }
+            </div>
+        </div>
+        <br />
+        @if (@question.TypeID == 1)
+        {
+            <a class="btn btn-warning" href="@Url.Action("GeneralKnowledge")">Back To List</a>
+        }
+        else if (@question.TypeID == 2)
+        {
+            <a class="btn btn-warning" href="@Url.Action("Mathematics")">Back To List</a>
+        }
+        else
+        {
+            <a class="btn btn-warning" href="@Url.Action("ComputerTechnology")">Back To List</a>
+        }
+
+        <script>
+            $('.tabs').tabs();
+            $('.modal').modal();
+            $('select').select();
+            function get_val(id) {
+                var answer = $("#" + id).val();
+                $("#val_" + id).val(answer);
+            }
+        </script>
+
+    </div>
+</div>

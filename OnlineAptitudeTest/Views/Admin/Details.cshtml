@@ -1,0 +1,96 @@
+﻿@model OnlineAptitudeTest.Models.AdminManager
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="outer-w3-agile col-xl mt-3 mr-xl-3">
+    <h3 class="main-title-w3layouts mb-2 text-center">Manager Details</h3>
+    <hr />
+    <div id="content">
+        <div id="add_normal" class="col s12">
+            <table>
+                <tr>
+                    <td style="width:50%" class="font-weight-bold">
+                        Manager ID:
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.AdminManagerID)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">
+                        Account:
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Username)
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:50%" class="font-weight-bold">
+                        Email:
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Email)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">
+                        Name:
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Name)
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:50%" class="font-weight-bold">
+                        Gender:
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Gender)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">
+                        Birthday:
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Birthday)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">
+                        Phone:
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Phone)
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:50%" class="font-weight-bold">
+                        Last login:
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.LastLogin)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">
+                        Role:
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Role.RoleName)
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <hr />
+        @Html.ActionLink("Edit", "EditManager", new { id = Model.AdminManagerID }, new { @class = "btn btn-success" })
+        <hr />
+        <p>
+            <a class="btn btn-warning" href="@Url.Action("ManagerList")">Back To List</a>
+        </p>
+
+    </div>
+</div>
+

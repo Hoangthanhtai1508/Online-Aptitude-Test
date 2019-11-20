@@ -1,0 +1,83 @@
+﻿@model OnlineAptitudeTest.Models.AdminManager
+@{
+    ViewBag.Title = "EditManager";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="outer-w3-agile col-xl mt-3 mr-xl-3">
+    <h3 class="main-title-w3layouts mb-2 text-center">Edit Manager</h3>
+    <hr />
+    <div id="content">
+        @if (TempData["Username"] != null && (bool)TempData["Username"])
+        {
+            <p style="color:brown"><span class="timer success">@TempData["statusCC"]</span></p>
+        }
+        else
+        {
+            <p style="color:brown"><span class="timer failed">@TempData["statusCC"]</span></p>
+        }
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            if (ViewBag.error != null)
+            {
+                <span class="title failed text-danger">@ViewBag.error</span>
+            }
+
+
+            <form action="#" method="post">
+                <div class="form-row">
+                    <input type="hidden" class="form-control" name="AdminManagerID" placeholder="AdminManagerID" required value="@Model.AdminManagerID">
+                    <input type="hidden" class="form-control" name="RoleID" placeholder="RoleID" required value="@Model.RoleID">
+                    <input type="hidden" class="form-control" name="LastLogin" placeholder="LastLogin" required value="@Model.LastLogin">
+                    <div class="form-group col-md-6">
+                        <label class="font-weight-bold">Username(*)</label>
+                        <input type="text" class="form-control" name="Username" title="UserName must consist of 5 to 30 characters, number and no special characters" placeholder="Username" required value="@Model.Username">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label  class="font-weight-bold">Password(*)</label>
+                        <input type="password" class="form-control" name="Password" pattern="[A-Za-z0-9]{5,40}" title="Password must consist of 5 to 40 characters, number and no special characters" placeholder="Password" required value="@Model.Password">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="font-weight-bold">Email address(*)</label>
+                        <input type="email" class="form-control" name="Email" placeholder="you@example.com" required value="@Model.Email">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label  class="font-weight-bold">Name(*)</label>
+                        <input type="text" class="form-control" name="Name" placeholder="Name" pattern="[a-zA-Z ]{5,30}$" title="Name must consist of 5 to 30 characters, space and no special characters" required value="@Model.Name">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="font-weight-bold">Gender(*)</label>
+                        <div>
+                            <div>@Html.RadioButtonFor(model => model.Gender, "Male") Male</div>
+                            <div>@Html.RadioButtonFor(model => model.Gender, "Female") Female</div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label  class="font-weight-bold">Birthday(*)</label>
+                        <div>
+                            <input type="date" class="form-control" name="Birthday" required value="@Model.Birthday.Date.ToString("yyyy-MM-dd")" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="font-weight-bold">Phone(*)</label>
+                        <input type="tel" class="form-control" name="Phone" pattern="[0-9]{5,15}" title="Phone consists of 5 to 15 numbers" placeholder="Phone" required value="@Model.Phone">
+                    </div>
+                </div>
+                <hr />
+                <button type="submit" class="btn btn-success">Update</button>
+            </form>
+            <hr />
+            <p>
+                <a class="btn btn-warning" href="@Url.Action("ManagerList")">Back To List</a>
+            </p>
+
+        }
+    </div>
+</div>

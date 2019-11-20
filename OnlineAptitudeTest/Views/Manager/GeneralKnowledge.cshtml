@@ -1,0 +1,77 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<OnlineAptitudeTest.Models.Question>
+
+@{
+    ViewBag.Title = "GeneralKnowledge";
+    Layout = "~/Views/Shared/_ManagerLayout.cshtml";
+}
+
+<div class="outer-w3-agile col-xl mt-3 mr-xl-3">
+    <h3 class="main-title-w3layouts mb-2 text-center">General Knowledge Quiz</h3>
+    <div class="title-content">
+        @if (TempData["QuestionID"] == null)
+        {
+            <p style="color:brown"><span class="timer success">@TempData["status"]</span></p>
+        }
+        else
+        {
+            <p> <span class="timer failed" style="color:red">@TempData["status"]</span></p>
+        }
+    </div>
+    <hr />
+    <span style="color:green" class="font-weight-bold">
+        @Html.ActionLink("Create New", "Create")
+    </span>
+    <hr />
+    @using (Html.BeginForm("GeneralKnowledge", "Manager"))
+    {
+        <div>
+            <span>Search by question details: </span>
+            <input type="text" name="txtSearch" />
+            <input type="submit" value="Search" class="btn btn-success" />
+        </div>
+    }
+    <hr />
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr style="text-align:left">
+                <th width="60px">
+                    ID
+                </th>
+                <th>
+                    Question:
+                </th>
+                <th width="300px">
+                    Action
+                </th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>
+                    <p>@Html.DisplayFor(modelItem => item.QuestionID)</p>
+                </td>
+                <td>
+                    <p>@Html.DisplayFor(modelItem => item.QuestionDetails)</p>
+                </td>
+                <td>
+                    <span>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.QuestionID }, new { @class = "btn btn-success" }) |
+                        @Html.ActionLink("Detail", "Detail", new { id = item.QuestionID }, new { @class = "btn btn-info" }) |
+                        @Html.ActionLink("Delete", "DeleteGeneralKnowledge", new { id = item.QuestionID }, new { @class = "btn btn-danger" })
+                    </span>
+                </td>
+            </tr>
+        }
+        <tr></tr>
+    </table>
+    <!-- Thêm mã phân trang -->
+    <br />
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("GeneralKnowledge",
+        new { page }))
+    <!-- Kết thúc -->
+</div>

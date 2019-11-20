@@ -1,0 +1,196 @@
+﻿<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Online Aptitube Test</title>
+    <!-- Meta Tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!-- //Meta Tags -->
+    <!-- Style-sheets -->
+    <!-- Bootstrap Css -->
+    <link href="~/Content/Template/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- Bootstrap Css -->
+    <!-- Common Css -->
+    <link href="~/Content/Template/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <!--// Common Css -->
+    <!-- Nav Css -->
+    <link rel="stylesheet" href="~/Content/Template/css/style4.css">
+    <!--// Nav Css -->
+    <!-- Fontawesome Css -->
+    <link href="~/Content/Template/css/fontawesome-all.css" rel="stylesheet">
+    <!--// Fontawesome Css -->
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+    <!--// Style-sheets -->
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Sidebar Holder -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h1>
+                    <a href="@Url.Action("Index", "Manager")">Webster</a>
+                </h1>
+                <span>W</span>
+            </div>
+            <div class="profile-bg"></div>
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="@Url.Action("Index", "Manager")">
+                        <i style="width:28px; margin:auto" class="fas fa-th-large"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">
+                        <i style="width:28px; margin:auto" class="fas fa-question-circle"></i>
+                        Questions
+                        <i class="fas fa-angle-down fa-pull-right"></i>
+                    </a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a href="@Url.Action("GeneralKnowledge", "Manager")">General Knowledge</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Mathematics", "Manager")">Mathematics</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("ComputerTechnology", "Manager")">Computer Technology</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="@Url.Action("Candidate","Manager")">
+                        <i style="width:28px; margin:auto" class="fas fa-users"></i>
+                        Candidate
+                    </a>
+                </li>
+                <li>
+                    <a href="#homeSubmenu2" data-toggle="collapse" aria-expanded="false">
+                        <i style="width:28px; margin:auto" class="fas fa-question-circle"></i>
+                        Test
+                        <i class="fas fa-angle-down fa-pull-right"></i>
+                    </a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu2">
+                        <li>
+                            <a href="@Url.Action("TestView")">Test View</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("TestCode")">Add question/Add candidate</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="@Url.Action("Report")">
+                        <i style="width:28px; margin:auto" class="fas fa-chart-line"></i>
+                        Report
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Page Content Holder -->
+        <div id="content">
+            <!-- top-bar -->
+            <nav class="navbar navbar-default mb-xl-5 mb-4">
+                <div class="container-fluid">
+
+                    <div class="navbar-header">
+                        <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </div>
+
+                    <ul class="top-icons-agileits-w3layouts float-right">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true"
+                               aria-expanded="false">
+                                <i class="far fa-user"></i>
+                            </a>
+                            <div class="dropdown-menu drop-3">
+                                <div class="profile d-flex mr-o">
+                                    <div class="profile-r align-self-center">
+                                        <h3 class="sub-title-w3-agileits">@Session["NAME"]</h3>
+                                    </div>
+                                </div>
+                                <a href="@Url.Action("ChangePassword","Manager")" class="dropdown-item mt-3">
+                                    <h4>
+                                        <i class="far fa-user mr-3"></i>Change Password
+                                    </h4>
+                                </a>
+
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="@Url.Action("Logout")">Logout</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <!--// top-bar -->
+            <!-- Content -->
+            @RenderBody()
+            <!--// Content -->
+            <!-- Copyright -->
+            <div class="copyright-w3layouts py-xl-3 py-2 mt-xl-5 mt-4 text-center">
+                <p>
+                    © 2019 Online Aptitude Test. All Rights Reserved | Design by Group 1 - T1.1807.M0
+                </p>
+            </div>
+            <!--// Copyright -->
+        </div>
+    </div>
+
+
+    <!-- Required common Js -->
+    <!-- Required common Js -->
+    <script src='~/Content/Template/js/jquery-2.2.3.min.js'></script>
+    <!-- //Required common Js -->
+    <!-- Js for bootstrap working-->
+    <script src="~/Content/Template/js/bootstrap.min.js"></script>
+    <!-- //Js for bootstrap working -->
+    <!-- //Required common Js -->
+    <!-- Sidebar-nav Js -->
+    <script>
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+    </script>
+    <!--// Sidebar-nav Js -->
+    <!-- dropdown nav -->
+    <script>
+        $(document).ready(function () {
+            $(".dropdown").hover(
+                function () {
+                    $('.dropdown-menu', this).stop(true, true).slideDown("fast");
+                    $(this).toggleClass('open');
+                },
+                function () {
+                    $('.dropdown-menu', this).stop(true, true).slideUp("fast");
+                    $(this).toggleClass('open');
+                }
+            );
+        });
+    </script>
+    <!-- //dropdown nav -->
+
+</body>
+
+</html>

@@ -1,0 +1,89 @@
+﻿<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+
+@using OnlineAptitudeTest.Models
+@model LoginModel
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Online Aptitube Test</title>
+    <!-- Meta Tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!-- //Meta Tags -->
+    <!-- Style-sheets -->
+    <!-- Bootstrap Css -->
+    <link href="~/Content/Template/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- Bootstrap Css -->
+    <!-- Common Css -->
+    <link href="~/Content/Template/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <!--// Common Css -->
+    <!-- Nav Css -->
+    <link rel="stylesheet" href="~/Content/Template/css/style4.css">
+    <!--// Nav Css -->
+    <!-- Fontawesome Css -->
+    <link href="~/Content/Template/css/fontawesome-all.css" rel="stylesheet">
+    <!--// Fontawesome Css -->
+    <!--// Style-sheets -->
+</head>
+
+<body>
+    <div class="bg-page py-5">
+        <div class="container">
+            <!-- main-heading -->
+            <h2 class="main-title-w3layouts mb-2 text-center text-white">Login</h2>
+            <!--// main-heading -->
+            <div class="form-body-w3-agile text-center w-lg-50 w-sm-75 w-100 mx-auto mt-5">
+                @using (Html.BeginForm("Index", "Login", FormMethod.Post))
+                {
+                    if (ViewBag.error != null)
+                    {
+                        <span class="title failed text-danger">@ViewBag.error</span>
+                    }
+                    <div class="form-group">
+                        <label>Username</label>
+                        @Html.TextBoxFor(m => m.Username, new { @class = "form-control", @required = "required", @autofocus = "autofocus" })
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @required = "required" })
+                    </div>
+
+                    <button type="submit" class="btn btn-primary error-w3l-btn mt-sm-5 mt-3 px-4">Login</button>
+                }
+            </div>
+
+            <!-- Copyright -->
+            <div class="copyright-w3layouts py-xl-3 py-2 mt-xl-5 mt-4 text-center">
+                <p>
+                    © 2019 Online Aptitude Test. All Rights Reserved | Design by Group 1 - T1.1807.M0
+                </p>
+            </div>
+            <!--// Copyright -->
+        </div>
+    </div>
+
+    <!-- Required common Js -->
+    <script src='~/Content/Template/js/jquery-2.2.3.min.js'></script>
+    <!-- //Required common Js -->
+    <!-- Js for bootstrap working-->
+    <script src="~/Content/Template/js/bootstrap.min.js"></script>
+    <!-- //Js for bootstrap working -->
+
+</body>
+
+</html>

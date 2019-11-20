@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="outer-w3-agile col-xl mt-3 mr-xl-3">
+    <h3 class="main-title-w3layouts mb-2 text-center">Dashboard</h3>
+    <div id="content">
+
+        <section class="pricing-tables">
+            <div class="card-deck text-center row">
+                <div class="col-xl-3 col-md-3">
+
+                </div>
+                <div class="card box-shadow col-xl-3 col-md-3 my-lg-0 my-3">
+                    <div class="card-header">
+                        <h5 class="py-md-4 py-xl-3 py-2">Manager</h5>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title pricing-card-title">
+                            <span class="align-top">@ViewBag.CountMan managers</span>
+                        </h5>
+                        <a class="btn btn-lg btn-block btn-outline-primary py-2" href="@Url.Action("ManagerList", "Admin")">Show all</a>
+                    </div>
+                </div>
+                <div class="card box-shadow col-xl-3 col-md-3 my-lg-0 my-3">
+                    <div class="card-header">
+                        <h5 class="py-md-4 py-xl-3 py-2">Passed candidate</h5>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title pricing-card-title">
+                            <span class="align-top">@ViewBag.CountCan candidates</span>
+                        </h5>
+                        <a class="btn btn-lg btn-block btn-outline-primary py-2" href="@Url.Action("PassedCandidateList", "Admin")">Show all</a>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-3">
+                    
+                </div>
+            </div>
+            <!--//  Pricing tables1 -->
+        </section>
+    </div>
+
+    <!--// Error Page Content -->
+</div>

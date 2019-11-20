@@ -1,0 +1,72 @@
+﻿@using OnlineAptitudeTest.Models
+@model CandidateScoreViewModel
+@{
+    ViewBag.Title = "Result";
+    Layout = "~/Views/Shared/_CandidateLayout.cshtml";
+}
+<div class="outer-w3-agile mt-3">
+    <h3 class="main-title-w3layouts mb-2 text-center">Result</h3>
+    <div id="content">
+
+
+        <table class="table table-bordered" style="width:60%; margin:auto">
+            <tbody>
+                <tr>
+                    <td style="width:325px; font-weight:bold">Name</td>
+                    <td>@Model.candidate.Name</td>
+                </tr>
+                <tr>
+                    <td style="width:325px; font-weight:bold">Email</td>
+                    <td>@Model.candidate.Email</td>
+                </tr>
+                <tr>
+                    <td style="width:325px; font-weight:bold">Phone</td>
+                    <td>@Model.candidate.Phone</td>
+                </tr>
+                <tr>
+                    <td style="width:325px; font-weight:bold">General Knowledge score</td>
+                    <td>@Model.score.Part1Score</td>
+                </tr>
+                <tr>
+                    <td style="width:325px; font-weight:bold">Mathematics score</td>
+                    <td>@Model.score.Part2Score</td>
+                </tr>
+                <tr>
+                    <td style="width:325px; font-weight:bold">Computer Technology score</td>
+                    <td>@Model.score.Part3Score</td>
+                </tr>
+                <tr>
+                    <td style="width:325px; font-weight:bold">Final score</td>
+                    <td>@String.Format("{0:0.00}", Model.candidate.FinalScore)</td>
+                </tr>
+                <tr>
+                    <td style="width:325px; font-weight:bold">Final result</td>
+                    @if (Model.candidate.Pass == 1)
+                    {
+                        <td>Passed</td>
+                    }
+                    else
+                    {
+                        <td>Failed</td>
+                    }
+
+                </tr>
+            </tbody>
+        </table>
+        <br />
+        <div class="row">
+            @if (Model.candidate.Pass == 1)
+            {
+                <p class="text-success" style="margin:auto; font-weight:bold">You have cleared this round, next round would be HR Round.</p>
+            }
+            else
+            {
+                <p class="text-danger" style="margin:auto; font-weight:bold">You have failed this round.</p>
+            }
+        </div>
+
+
+        <br />
+    </div>
+    <br />
+</div>

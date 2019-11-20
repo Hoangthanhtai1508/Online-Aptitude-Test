@@ -1,0 +1,133 @@
+﻿@using OnlineAptitudeTest.Models
+@{
+    var Candidate = Model as Candidate;
+    ViewBag.Title = "Edit candidate ID: " + Candidate.CandidateID;
+    Layout = "~/Views/Shared/_ManagerLayout.cshtml";
+    //  Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    //var ListClass = ViewBag.ListClass;
+    // var ListSpecialities = ViewBag.ListSpecialities as List<speciality>;
+}
+<div class="outer-w3-agile col-xl mt-3 mr-xl-3">
+    <h3 class="main-title-w3layouts mb-2 text-center">Edit Candidate</h3>
+    <div id="content">
+        <div class="title-content">
+            @if (TempData["CandidateID"] != null && (bool)TempData["CandidateID"])
+            {
+                <span class="timer success">@TempData["statusEdit"]</span>
+            }
+            else
+            {
+                <span class="timer failed">@TempData["statusEdit"]</span>
+            }
+        </div>
+        <span style="color:green" class="font-weight-bold">@ViewBag.Title</span>
+        <hr />
+        <div class="content">
+            <div class="row">
+                <div id="add_normal" class="col s12">
+                    @using (Html.BeginForm("EditCandidate", "Manager", FormMethod.Post))
+                    {
+                        <input type="hidden" id="CandidateID" name="CandidateID" required value="@Candidate.CandidateID" class="hidden">
+                        <table>
+                            <tr>
+                                <td>
+                                    Email:
+                                </td>
+                                <td style="width:80%">
+                                    <input type="email" id="Email" class="form-control" name="Email" placeholder="@Candidate.Email">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Name:
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="Name" name="Name" pattern="[a-zA-Z ]{5,30}$" title="Name must consist of 5 to 30 characters, space and no special characters" required value="@Candidate.Name">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Gender
+                                </td>
+                                <td>
+                                    <select name="gender" class="form-control" id="gender" required>
+                                        @if (Candidate.Gender == "Male")
+                                        {
+                                            <option value="Male" selected>Male</option>
+                                            <option value="Female">Female</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="Male"></option>
+                                            <option value="Female" selected>Female</option>
+                                        }
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Password:
+                                </td>
+                                <td>
+                                    <input type="password" class="form-control" data-minlength="5" name="Password" id="Password" placeholder="Leave blank if not changed">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Phone:
+                                </td>
+                                <td>
+                                    <input type="text" name="Phone" class="form-control" id="Phone" pattern="[0-9]{5,15}" title="Phone consists of 5 to 15 numbers" placeholder="@Candidate.Phone" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Address:
+                                </td>
+                                <td>
+                                    <input type="text" id="Address" class="form-control" name="Address" required value="@Candidate.Address">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Birthday:
+                                </td>
+                                <td>
+                                    <input type="date" name="Birthday" class="form-control" id="Birthday" required value="@Candidate.Birthday.Date.ToString("yyyy-MM-dd")">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Work Experience:
+                                </td>
+                                <td>
+                                    <input type="text" id="Work_Experience" class="form-control" name="Work_Experience" required value="@Candidate.Work_Experience">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Education Detail:
+                                </td>
+                                <td>
+                                    <input type="text" id="Education_Details" class="form-control" name="Education_Details" required value="@Candidate.Education_Details">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><button type="submit" class="btn btn-success" id="edit-student" name="edit-student">Edit</button></td>
+                            </tr>
+                        </table>
+                        <br />
+
+                        @Html.ActionLink("Back to List", "Candidate", null, new { @class = "btn btn-warning" })
+                    }
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script>$('select').select();</script>
+
+
+</div>

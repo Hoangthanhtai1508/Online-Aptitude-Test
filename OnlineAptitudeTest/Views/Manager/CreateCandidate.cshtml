@@ -1,0 +1,90 @@
+﻿@model OnlineAptitudeTest.Models.Candidate
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_ManagerLayout.cshtml";
+}
+
+<div class="outer-w3-agile col-xl mt-3 mr-xl-3">
+    <h3 class="main-title-w3layouts mb-2 text-center">Create New Candidate</h3>
+    <div id="content">
+
+        @if (TempData["CandidateID"] != null && (bool)TempData["CandidateID"])
+        {
+            <span class="timer success">@TempData["statusCC"]</span>
+        }
+        else
+        {
+            <span class="timer failed">@TempData["statusCC"]</span>
+        }
+
+
+
+
+
+            <div id="add_normal" class="col s12">
+                @using (Html.BeginForm("CreateCandidate", "Manager", FormMethod.Post))
+                {
+
+                    <table class="table">
+                        <tr>
+                            <td>
+                                <div class="input-field">
+                                    <label for="Name" class="font-weight-bold">Name<span class="failed">(*)</span></label>
+                                    <input type="text" class="form-control" id="Name" name="Name" pattern="[a-zA-Z ]{5,30}$" title="Name must consist of 5 to 30 characters, space and no special characters" onchange="" required>
+                                </div>
+                                <div class="input-field">
+                                    <label class="font-weight-bold">Gender</label>
+                                    <select name="Gender" id="Gender" class="form-control" required>
+                                        <option value="Male" selected>Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+
+                                </div>
+
+
+
+
+
+                                <div class="input-field">
+                                    <label for="Email" class="font-weight-bold">Email<span class="failed">(*)</span></label>
+                                    <input type="email" class="form-control" id="Email" name="Email" required>
+                                </div>
+                                <div class="input-field">
+                                    <label class="font-weight-bold">Birthday</label>
+                                    <input type="date" class="form-control" name="Birthday" id="Birthday" required>
+                                </div>
+                                <div>
+                                    <label class="control-label col-md"><span class="failed"></span></label>
+                                    <button type="submit" class="btn full-width" id="add-student" name="add-student">Create</button>
+                                </div>
+                            </td>
+                            <td>
+
+                                <div class="input-field">
+                                    <label for="Address" class="font-weight-bold">Address<span class="failed">(*)</span></label>
+                                    <input type="text" class="form-control" id="Address" name="Address" required>
+                                </div>
+                                <div class="input-field">
+                                    <label for="Phone" class="font-weight-bold">Phone <span class="failed">(*)</span></label>
+                                    <input type="text" id="Phone" class="form-control" pattern="[0-9]{5,15}" title="Phone consists of 5 to 15 numbers" name="Phone" onchange="" required>
+                                </div>
+                                <div class="input-field">
+                                    <label for="Education_Details" class="font-weight-bold">Education Details<span class="failed">(*)</span></label>
+                                    <input type="text" id="Education_Details" class="form-control" name="Education_Details" onchange="" required>
+                                </div>
+                                <div class="input-field">
+                                    <label for="Work_Experience" class="font-weight-bold">Work Experience<span class="failed">(*)</span></label>
+                                    <input type="text" id="Work_Experience" class="form-control" name="Work_Experience" onchange="" required>
+                                </div>
+
+
+                            </td>
+                        </tr>
+                    </table>
+                }
+                @Html.ActionLink("Back to List", "Candidate", null, new { @class = "btn btn-warning" })
+            </div>
+
+    </div>
+</div>

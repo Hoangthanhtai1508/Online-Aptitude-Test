@@ -1,0 +1,107 @@
+﻿@model OnlineAptitudeTest.Models.Candidate
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_ManagerLayout.cshtml";
+}
+
+<div class="outer-w3-agile col-xl mt-3 mr-xl-3">
+    <h3 class="main-title-w3layouts mb-2 text-center">Candidate Detail</h3>
+    <div id="content">
+
+        <div>
+            <table>
+                <tr>
+                    <td style="font-weight:bold; width:200px">@Html.DisplayNameFor(model => model.Username)</td>
+                    <td>@Html.DisplayFor(model => model.Username)</td>
+                </tr>
+
+                <tr>
+                    <td style="font-weight:bold">@Html.DisplayNameFor(model => model.Email)</td>
+                    <td>@Html.DisplayFor(model => model.Email)</td>
+                </tr>
+
+                <tr>
+                    <td style="font-weight:bold">@Html.DisplayNameFor(model => model.Name)</td>
+                    <td>@Html.DisplayFor(model => model.Name)</td>
+                </tr>
+
+                <tr>
+                    <td style="font-weight:bold">@Html.DisplayNameFor(model => model.Gender)</td>
+                    <td>@Html.DisplayFor(model => model.Gender)</td>
+                </tr>
+
+                <tr>
+                    <td style="font-weight:bold">@Html.DisplayNameFor(model => model.Address)</td>
+                    <td>@Html.DisplayFor(model => model.Address)</td>
+                </tr>
+
+
+                <tr>
+                    <td style="font-weight:bold">@Html.DisplayNameFor(model => model.Birthday)</td>
+                    <td>@Model.Birthday.Date.ToString("dd-MM-yyyy")</td>
+                </tr>
+
+                <tr>
+                    <td style="font-weight:bold">@Html.DisplayNameFor(model => model.Phone)</td>
+                    <td>@Html.DisplayFor(model => model.Phone)</td>
+                </tr>
+
+                <tr>
+                    <td style="font-weight:bold">Education Details</td>
+                    <td>@Html.DisplayFor(model => model.Education_Details)</td>
+                </tr>
+
+                <tr>
+                    <td style="font-weight:bold">Work Experience</td>
+                    <td>@Html.DisplayFor(model => model.Work_Experience)</td>
+                </tr>
+
+                <tr>
+                    <td style="font-weight:bold">@Html.DisplayNameFor(model => model.Pass)</td>
+                    <td>
+                        @{
+                            string mess = "";
+                            if (@Model.Pass == null)
+                            {
+                                mess = "";
+                            }
+                            else
+                            {
+                                if (@Model.Pass == 1)
+                                {
+                                    mess = "Yes";
+                                }
+                                else
+                                {
+                                    if (@Model.Pass == 0)
+                                    {
+                                        mess = "No";
+                                    }
+                                }
+
+                            }
+                        }
+                        @mess
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="font-weight:bold">Final Score</td>
+                    <td>@Html.DisplayFor(model => model.FinalScore)</td>
+                </tr>
+
+                <tr>
+                    <td style="font-weight:bold">Last Login</td>
+                    <td>@Html.DisplayFor(model => model.LastLogin)</td>
+                </tr>
+
+            </table>
+        </div>
+        <br>
+        <p>
+            @Html.ActionLink("Edit", "EditCandidate", new { id = Model.CandidateID }, new { @class = "btn btn-success" }) |
+            @Html.ActionLink("Back to List", "Candidate", null, new { @class = "btn btn-warning" })
+        </p>
+    </div>
+</div>

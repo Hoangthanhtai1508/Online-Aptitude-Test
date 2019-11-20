@@ -1,0 +1,53 @@
+﻿@model OnlineAptitudeTest.Models.Test
+
+@{
+    ViewBag.Title = "EditTest";
+    Layout = "~/Views/Shared/_ManagerLayout.cshtml";
+}
+
+<div class="outer-w3-agile col-xl mt-3 mr-xl-3">
+    <h3 class="main-title-w3layouts mb-2 text-center">Edit Test</h3>
+    <div id="content">
+
+        @if (TempData["check"] != null && (bool)TempData["check"])
+        {
+            <span class="timer success">@TempData["statusCTC"]</span>
+        }
+        else
+        {
+            <span class="timer failed">@TempData["statusCTC"]</span>
+        }
+
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.TestCode)
+
+            <table>
+                <tr>
+                    <td  width="130px">Date start</td>
+                    <td><input type="date" name="date" class="form-control" required value="@ViewBag.date" /></td>
+                </tr>
+                <tr>
+                    <td>Time start</td>
+                    <td><input type="time" name="time" class="form-control" required value="@ViewBag.time" /></td>
+                </tr>
+                <tr>
+                    <td>Note</td>
+                    <td><input type="text" name="note" class="form-control" value="@Model.Note" /></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="Save" class="btn btn-info" /></td>
+                </tr>
+            </table>
+        }
+
+        <div>
+            @Html.ActionLink("Back to List", "TestView", null, new { @class = "btn btn-warning" })
+        </div>
+    </div>
+</div>

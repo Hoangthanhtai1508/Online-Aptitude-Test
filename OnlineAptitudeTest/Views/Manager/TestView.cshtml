@@ -1,0 +1,81 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<OnlineAptitudeTest.Models.Test>
+
+
+@{
+    ViewBag.Title = "TestView";
+    Layout = "~/Views/Shared/_ManagerLayout.cshtml";
+}
+<div class="outer-w3-agile col-xl mt-3 mr-xl-3">
+    <h3 class="main-title-w3layouts mb-2 text-center">Test List View</h3>
+    <div id="content">
+        @if (TempData["CandidateID"] != null && (bool)TempData["CandidateID"])
+        {
+            <span class="timer success">@TempData["statusTV"]</span>
+        }
+        else
+        {
+            <span class="timer failed">@TempData["statusTV"]</span>
+        }
+
+
+        <hr />
+        <span style="color:green" class="font-weight-bold">@Html.ActionLink("Create New Test", "CreateTest")</span>
+        <hr />
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>
+                        Test Code
+                    </th>
+                    <th>
+                        Time Start
+                    </th>
+                    <th>
+                        Time Create
+                    </th>
+                    <th>
+                        Note
+                    </th>
+                    <th>
+                        Create By
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TestCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TimeStart)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TimeCreate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Note)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AdminManager.Username)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "EditTest", new { id = item.TestCode }, new { @class = "btn btn-info" }) |
+
+                        @Html.ActionLink("Delete", "DeleteTestView", new { id = item.TestCode }, new { @class = "btn btn-danger" })
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <!-- Thêm mã phân trang -->
+        <br />
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("TestView",
+            new { page }))
+        <!-- Kết thúc -->
+    </div>
+</div>

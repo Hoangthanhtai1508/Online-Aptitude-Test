@@ -1,0 +1,183 @@
+﻿@using OnlineAptitudeTest.Models;
+@model List<CandidateTestViewModel>
+@{
+    ViewBag.Title = "GeneralKnowledge";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Online Aptitube Test</title>
+    <!-- Meta Tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!-- //Meta Tags -->
+    <!-- Style-sheets -->
+    <!-- Bootstrap Css -->
+    <link href="~/Content/Template/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- Bootstrap Css -->
+    <!-- Common Css -->
+    <link href="~/Content/Template/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <!--// Common Css -->
+    <!-- Nav Css -->
+    <link rel="stylesheet" href="~/Content/Template/css/style4.css">
+    <!--// Nav Css -->
+    <!-- Fontawesome Css -->
+    <link href="~/Content/Template/css/fontawesome-all.css" rel="stylesheet">
+    <!--// Fontawesome Css -->
+    <!--// Style-sheets -->
+
+</head>
+<body>
+    <div style="width:50%; margin:auto">
+        <div class="" style="margin:auto; text-align:center">
+            <br />
+            <h1>General Knowledge</h1>
+            <br />
+            <h3 class="text-danger"><i class="far fa-clock"></i> <span id="timer"> @ViewBag.min : @ViewBag.sec</span></h3>
+            <br />
+        </div>
+
+        @{
+            int x = 1;
+            foreach (var item in Model)
+            {
+                <div>@x. @item.question.QuestionDetails</div>
+                <div>
+                    <p>
+                        <label>
+                            @if (item.candidate_test.CandidateAnswer != null && item.candidate_test.CandidateAnswer.Trim().Equals(item.question.Answer_a.Trim()))
+                            {
+                                <input name="@item.question.QuestionID" data-idquest="@item.question.QuestionID" type="radio" data-stt="@x" value="@item.question.Answer_a.Trim()" checked />
+                            }
+                            else
+                            {
+                                <input name="@item.question.QuestionID" data-idquest="@item.question.QuestionID" type="radio" data-stt="@x" value="@item.question.Answer_a.Trim()" />
+                            }
+                            <span>@item.question.Answer_a</span>
+                        </label>
+                    </p>
+
+                    <p>
+                        <label>
+                            @if (item.candidate_test.CandidateAnswer != null && item.candidate_test.CandidateAnswer.Trim().Equals(item.question.Answer_b.Trim()))
+                            {
+                                <input name="@item.question.QuestionID" data-idquest="@item.question.QuestionID" type="radio" data-stt="@x" value="@item.question.Answer_b.Trim()" checked />
+                            }
+                            else
+                            {
+                                <input name="@item.question.QuestionID" data-idquest="@item.question.QuestionID" type="radio" data-stt="@x" value="@item.question.Answer_b.Trim()" />
+                            }
+                            <span>@item.question.Answer_b</span>
+                        </label>
+                    </p>
+
+                    <p>
+                        <label>
+                            @if (item.candidate_test.CandidateAnswer != null && item.candidate_test.CandidateAnswer.Trim().Equals(item.question.Answer_c.Trim()))
+                            {
+                                <input name="@item.question.QuestionID" data-idquest="@item.question.QuestionID" type="radio" data-stt="@x" value="@item.question.Answer_c.Trim()" checked />
+                            }
+                            else
+                            {
+                                <input name="@item.question.QuestionID" data-idquest="@item.question.QuestionID" type="radio" data-stt="@x" value="@item.question.Answer_c.Trim()" />
+                            }
+                            <span>@item.question.Answer_c</span>
+                        </label>
+                    </p>
+
+                    <p>
+                        <label>
+                            @if (item.candidate_test.CandidateAnswer != null && item.candidate_test.CandidateAnswer.Trim().Equals(item.question.Answer_d.Trim()))
+                            {
+                                <input name="@item.question.QuestionID" data-idquest="@item.question.QuestionID" type="radio" data-stt="@x" value="@item.question.Answer_d.Trim()" checked />
+                            }
+                            else
+                            {
+                                <input name="@item.question.QuestionID" data-idquest="@item.question.QuestionID" type="radio" data-stt="@x" value="@item.question.Answer_d.Trim()" />
+                            }
+                            <span>@item.question.Answer_d</span>
+                        </label>
+                    </p>
+
+                </div>
+                <br />
+                x = x + 1;
+            }
+        }
+        <div style="margin:auto; text-align:center">
+            <a href="@Url.Action("SubmitPart1")" class="btn btn-success" style="width: 30%;margin-top: 20px;margin-bottom: 20px;" onclick="return confirm('Finish this part?')">Finish</a>
+        </div>
+
+        <br />
+        <br />
+        <br />
+        <br />
+    </div>
+
+
+    <!-- Required common Js -->
+    <script src='~/Content/Template/js/jquery-2.2.3.min.js'></script>
+    <!-- //Required common Js -->
+    <!-- Js for bootstrap working-->
+    <script src="~/Content/Template/js/bootstrap.min.js"></script>
+    <!-- //Js for bootstrap working -->
+    <!-- Js for countdown timer and update candidate answer -->
+    <script>
+    var min = @ViewBag.min;
+    var sec = @ViewBag.sec;
+    countdown();
+    function countdown() {
+        cdID = setInterval(function () {
+            if (sec == 0) {
+                min--;
+                sec = 60;
+            }
+            sec--;
+            if (min < 10) {
+                $('#timer').css('color', 'red');
+                min_text = '0' + min;
+            } else {
+                min_text = min;
+            }
+            if (sec < 10)
+                sec_text = '0' + sec;
+            else
+                sec_text = sec;
+            $('#timer').text(min_text + ':' + sec_text);
+            if (min < 0) {
+                clearInterval(cdID);
+                alert('Time out!');
+                window.location.replace("@Url.Action("SubmitPart1", "Candidate")");
+            }
+        }, 1000);
+    }
+
+    $(function () {
+        $('input[type=radio]').change(function () {
+            var stt = $(this).data("stt");
+            var idquest = $(this).data("idquest");
+            var value = $(this).val();
+            var data = {
+                id: idquest,
+                answer: value,
+            }
+            var url = "@Url.Action("UpdateCandidateTest")";
+            $.post(url, data);
+        })
+    })
+    </script>
+    <!-- //Js for countdown timer and update candidate answer -->
+</body>
+</html>

@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "BeginTest";
+    Layout = "~/Views/Shared/_CandidateLayout.cshtml";
+}
+
+<h3 class="main-title-w3layouts mb-2 text-center">Begin test</h3>
+<br />
+<div class="row">
+    <div class="col-sm-4">
+        <div class="card">
+            <img class="card-img-top" src="~/Images/General Knowledge.jpg" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">General Knowledge</h5>
+                <p class="card-text">
+                    General knowledge is something that really helps us to grow both on personal as well as academic level.
+                    It narrows our sense of perceiving the world, understands, and analyzes the situations better as one would without proper knowledge.
+                </p>
+                <div class="container text-center">
+                    <a href="@Url.Action("GeneralKnowledge", "Candidate")" class="btn more mt-3">Begin</a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="card">
+            <img class="card-img-top" src="~/Images/Mathematics.jpg" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Mathematics</h5>
+                <p class="card-text">
+                    Mathematics is the science that deals with the logic of shape, quantity and arrangement.
+                    Math is all around us, in everything we do. 
+                    It is the building block for everything in our daily lives, including mobile devices, architecture (ancient and modern), art, money, engineering, and even sports.
+                </p>
+                <div class="container text-center">
+                    <a href="@Url.Action("Mathematics", "Candidate")" class="btn more mt-3">Begin</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="card">
+            <img class="card-img-top" src="~/Images/Computer Technology.jpg" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Computer Technology</h5>
+                <p class="card-text">
+                    Computer technology correlates with information technology and is used for study of computers, networks, computer networks, etc. 
+                    It encompasses a developing list of different software programs and devices.
+                    It includes programming, networking, database design and development to ensure that computers work properly.
+                </p>
+                <div class="container text-center">
+                    <a href="@Url.Action("ComputerTechnology", "Candidate")" class="btn more mt-3">Begin</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
